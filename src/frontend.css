@@ -1,0 +1,183 @@
+.keyboard__row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    height: 3em;
+    text-align: center;
+}
+
+.keyboard__row>* {
+    position: relative;
+    text-align: center;
+    color: #130F49;
+    float: left;
+    border-radius: 0.3em;
+    margin: 0.2em;
+    padding: 0.2em;
+    width: 3.3em;
+    height: 100%;
+    box-sizing: border-box;
+    cursor: pointer;
+    --webkit-user-select: none;
+    border: 1px solid #130F49;
+}
+
+.keyboard__row>div[data-pressed],
+.keyboard__row>div:active {
+    color: #130F49;
+    position: relative;
+}
+
+.key--letter {
+    line-height: 2.8em;
+}
+
+.hangman-frontend-subblocks {
+    display: inline-block;
+    font-size: 28px;
+    border-bottom: 2px solid #000;
+    margin: 0px 3px;
+    width: 40px;
+}
+
+.hangman-frontend-block {
+    text-align: center;
+}
+
+.hangman-frontend-block span {
+    color: #130F49;
+    font-size: 40px;
+}
+
+.clicked {
+    color: #130F49;
+    position: relative;
+}
+
+.correctClicked {
+    background-color: #68CA87;
+}
+
+.incorrectClicked {
+    background-color: rgba(19, 15, 73, 0.2);
+}
+
+.hide span {
+    display: none;
+}
+
+.showLetters {
+    font-size: 28px;
+    margin: 0px 3px;
+    width: 40px;
+    border-bottom: none;
+    display: inline-block;
+}
+
+.showLetters span {
+    display: block;
+}
+
+.lines {
+    justify-content: center;
+}
+
+.word {
+    padding: 0 20px;
+    white-space: nowrap;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.custom-flexboxes {
+    flex: 1 1 0px;
+}
+
+.misses-box-red {
+    width: 40px;
+    height: 40px;
+    background: #F15959;
+    border-radius: 10px;
+    transform: rotate(-45deg);
+}
+
+.misses-box-green {
+    width: 40px;
+    height: 40px;
+    background: #68CA87;
+    border-radius: 10px;
+    transform: rotate(-45deg);
+}
+
+.misses-box-number {
+    font-size: 25px;
+    display: inline-block;
+    transform: rotate(45deg);
+}
+
+.badge {
+    line-height: inherit !important;
+}
+
+.modal {
+    color: #130F49;
+}
+
+.custom-btn {
+    background-color: #130F49;
+}
+
+.badge {
+    line-height: 1.2 !important;
+}
+
+.custom-link, .custom-link:hover{
+    cursor: pointer;
+    color: #130F49;
+    text-decoration: none;
+    font-size: 20px;
+    width: auto;
+}
+
+@media only screen and (max-width:768px) {
+    
+    .showLetters {
+        width: 20px;
+    }
+
+    .hangman-frontend-subblocks {
+        width: 20px;
+    }
+
+    .hangman-frontend-block span {
+        font-size: 25px;
+    }
+
+    .lines {
+        margin-bottom: none;
+    }
+
+}
+
+@media only screen and (min-width: 992px) {
+    .showLetters {
+        width: 50px;
+    }
+
+    .hangman-frontend-subblocks {
+        width: 50px;
+    }
+
+    .hangman-frontend-block span {
+        font-size: 50px;
+    }
+
+    .word {
+        margin-bottom: 50px;
+    }
+
+
+}
+
+
+
