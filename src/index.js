@@ -1,116 +1,74 @@
-import { TextControl, Flex, FlexBlock, Button, PanelBody, PanelRow, TextareaControl } from "@wordpress/components"
-import { InspectorControls, MediaPlaceholder } from "@wordpress/block-editor"
+import { TextControl, Flex, FlexBlock } from "@wordpress/components"
+import { InspectorControls } from "@wordpress/block-editor"
+import { useState, useEffect } from "react"
+import "./index.css" // Import CSS file for styling
 
-wp.blocks.registerBlockType("theplugin/hangman", {
-    title: "Hangman for WordPress",
-    icon: "smiley",
-    category: "common",
-    attributes: {
-        phrase: { type: "array", default: [""] },
-        allowedWrongAnswers: { type: "string", default: 3 },
-        description: { type: "string" },
-        sponsorMessage: { type: "string" },
-        wordImage: { default: undefined },
-        sponsorImage: { default: undefined }
-    },
-    description: "Hangman Game for Wordpress",
-    edit: EditComponent,
-    save: function () {
-        return null
-    }
+wp.blocks.registerBlockType("theplugin/superhero", {
+  title: "Superheroes",
+  icon: "smiley",
+  category: "common",
+  attributes: {
+    heroName: { type: "string" },
+    intelligence: { type: "string" },
+    strength: { type: "string" },
+    speed: { type: "string" },
+    fullName: { type: "string" },
+    heroImage: { default: undefined },
+  },
+  description: "Superheroes Descriptions",
+  edit: EditComponent,
+  save: function () {
+    return null
+  },
 })
 
 function EditComponent(props) {
-    function setPhrase(newPhrase) {
-        props.setAttributes({ phrase: newPhrase })
+  const [heroes, setHeroes] = useState([])
+  const [heroOftheDay, setHeroOftheDay] = useState(null)
+
+  useEffect(() => {
+    const getHero = async () => {
+      try {
+        const response = await fetch("https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/all.json")
+        if (!response.ok) {
+          throw new Error("Failed to fetch heroes")
+        }
+        const data = await response.json()
+        setHeroes(data)
+      } catch (error) {
+        console.error("Error fetching heroes:", error)
+      }
     }
-    function changeAllowedVal(allowedValue) {
-        props.setAttributes({ allowedWrongAnswers: allowedValue })
-    }
-    function changeDescription(newDescrip) {
-        props.setAttributes({ description: newDescrip })
-    }
-    function changeMessage(newMessage) {
-        props.setAttributes({ sponsorMessage: newMessage })
-    }
-    function setWordImage(newImage) {
-        props.setAttributes({ wordImage: newImage.url })
-    }
-    function setSponsorImage(newSponsorImage) {
-        props.setAttributes({ sponsorImage: newSponsorImage.url })
-    }
-    return (
-        <>
-            <InspectorControls>
-                <PanelBody>
-                    <PanelRow>
-                        <TextControl label="Allowed Wrong Answers" value={props.attributes.allowedWrongAnswers} type="number" onChange={changeAllowedVal}></TextControl>
-                    </PanelRow>
-                    <PanelRow>
-                        <TextareaControl maxLength="200" label="Description" value={props.attributes.description} type="text" onChange={changeDescription}></TextareaControl>
-                    </PanelRow>
-                    {props.attributes.wordImage ? (
-                        <PanelRow>
-                            <img src={props.attributes.wordImage} height="100px" width="100%" />
-                        </PanelRow>) : " "}
-                    <PanelRow>
-                        <MediaPlaceholder labels={{
-                            title: "Word Image",
-                        }}
-                            value={props.attributes.wordImage} onSelect={setWordImage}></MediaPlaceholder>
-                    </PanelRow>
-                    <PanelRow>
-                        <Button
-                            isPrimary
-                            onClick={() => {
-                                props.setAttributes({ wordImage: undefined})
-                            }}
-                        >
-                            Remove Word Image
-                        </Button>
-                    </PanelRow>
-                    <PanelRow>
-                        <TextareaControl maxLength="200" label="Sponsor Message" value={props.attributes.sponsorMessage} type="text" onChange={changeMessage}></TextareaControl>
-                    </PanelRow>
-                    {props.attributes.sponsorImage ? (
-                        <PanelRow>
-                            <img src={props.attributes.sponsorImage} height="100px" width="100%" />
-                        </PanelRow>) : " "}
-                    <PanelRow>
-                        <MediaPlaceholder labels={{
-                            title: "Sponsor Image",
-                        }}
-                            value={props.attributes.sponsorImage} onSelect={setSponsorImage}></MediaPlaceholder>
-                    </PanelRow>
-                    <PanelRow>
-                        <Button
-                            isPrimary
-                            onClick={() => {
-                                props.setAttributes({ sponsorImage: undefined})
-                            }}
-                        >
-                            Remove Sponsor Image
-                        </Button>
-                    </PanelRow>
-                </PanelBody>
-            </InspectorControls>
-            {props.attributes.phrase.map(function (word, index) {
-                return (
-                    <Flex>
-                        <FlexBlock>
-                            <TextControl
-                                autoFocus={word == undefined}
-                                value={word}
-                                onChange={newValue => {
-                                    const newphrase = props.attributes.phrase.concat([])
-                                    newphrase[index] = newValue
-                                    props.setAttributes({ phrase: newphrase })
-                                }}
-                            />
-                        </FlexBlock>
-                    </Flex>
-                )
-            })}
-        </>
-    )
+
+    getHero()
+  }, [])
+
+  function changeHero(hero) {
+    props.setAttributes({ heroName: hero.name })
+    props.setAttributes({ intelligence: hero.powerstats.intelligence })
+    props.setAttributes({ strength: hero.powerstats.strength })
+    props.setAttributes({ speed: hero.powerstats.speed })
+    props.setAttributes({ fullName: hero.biography.fullName })
+    props.setAttributes({ heroImage: hero.images.lg })
+  }
+
+  return (
+    <>
+      <Flex>
+        <InspectorControls></InspectorControls>
+        <FlexBlock>
+          {heroes.map((hero) => {
+            if (hero.biography.publisher === "Marvel Comics") {
+              return (
+                <div key={hero.id} className={`hero-button ${props.attributes.heroName === hero.name ? "selected" : ""}`} onClick={() => changeHero(hero)}>
+                  <TextControl value={hero.name} readOnly={true} />
+                </div>
+              )
+            }
+          })}
+          {heroOftheDay && <div>{props.attributes.heroName}</div>}
+        </FlexBlock>
+      </Flex>
+    </>
+  )
 }

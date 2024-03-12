@@ -1,0 +1,1 @@
+{"version":3,"file":"index.css","mappings":";;;AAAA;EACE,eAAe;EACf,sBAAsB;AACxB;AACA;EACE,sBAAsB;EACtB,WAAW;AACb","sources":["webpack://hangman/./src/index.css"],"sourcesContent":[".hero-button input {\r\n  cursor: pointer;\r\n  background-color: #fff;\r\n}\r\n.selected input {\r\n  background-color: #000;\r\n  color: #fff;\r\n}\r\n"],"names":[],"sourceRoot":""}

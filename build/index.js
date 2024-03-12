@@ -2,6 +2,28 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/index.css":
+/*!***********************!*\
+  !*** ./src/index.css ***!
+  \***********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "react":
+/*!************************!*\
+  !*** external "React" ***!
+  \************************/
+/***/ ((module) => {
+
+module.exports = window["React"];
+
+/***/ }),
+
 /***/ "@wordpress/block-editor":
 /*!*************************************!*\
   !*** external ["wp","blockEditor"] ***!
@@ -113,136 +135,95 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./index.css */ "./src/index.css");
 
 
 
-wp.blocks.registerBlockType("theplugin/hangman", {
-  title: "Hangman for WordPress",
+
+ // Import CSS file for styling
+
+wp.blocks.registerBlockType("theplugin/superhero", {
+  title: "Superheroes",
   icon: "smiley",
   category: "common",
   attributes: {
-    phrase: {
-      type: "array",
-      default: [""]
-    },
-    allowedWrongAnswers: {
-      type: "string",
-      default: 3
-    },
-    description: {
+    heroName: {
       type: "string"
     },
-    sponsorMessage: {
+    intelligence: {
       type: "string"
     },
-    wordImage: {
-      default: undefined
+    strength: {
+      type: "string"
     },
-    sponsorImage: {
+    speed: {
+      type: "string"
+    },
+    fullName: {
+      type: "string"
+    },
+    heroImage: {
       default: undefined
     }
   },
-  description: "Hangman Game for Wordpress",
+  description: "Superheroes Descriptions",
   edit: EditComponent,
   save: function () {
     return null;
   }
 });
 function EditComponent(props) {
-  function setPhrase(newPhrase) {
-    props.setAttributes({
-      phrase: newPhrase
-    });
-  }
-  function changeAllowedVal(allowedValue) {
-    props.setAttributes({
-      allowedWrongAnswers: allowedValue
-    });
-  }
-  function changeDescription(newDescrip) {
-    props.setAttributes({
-      description: newDescrip
-    });
-  }
-  function changeMessage(newMessage) {
-    props.setAttributes({
-      sponsorMessage: newMessage
-    });
-  }
-  function setWordImage(newImage) {
-    props.setAttributes({
-      wordImage: newImage.url
-    });
-  }
-  function setSponsorImage(newSponsorImage) {
-    props.setAttributes({
-      sponsorImage: newSponsorImage.url
-    });
-  }
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
-    label: "Allowed Wrong Answers",
-    value: props.attributes.allowedWrongAnswers,
-    type: "number",
-    onChange: changeAllowedVal
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextareaControl, {
-    maxLength: "200",
-    label: "Description",
-    value: props.attributes.description,
-    type: "text",
-    onChange: changeDescription
-  })), props.attributes.wordImage ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-    src: props.attributes.wordImage,
-    height: "100px",
-    width: "100%"
-  })) : " ", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.MediaPlaceholder, {
-    labels: {
-      title: "Word Image"
-    },
-    value: props.attributes.wordImage,
-    onSelect: setWordImage
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
-    isPrimary: true,
-    onClick: () => {
-      props.setAttributes({
-        wordImage: undefined
-      });
-    }
-  }, "Remove Word Image")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextareaControl, {
-    maxLength: "200",
-    label: "Sponsor Message",
-    value: props.attributes.sponsorMessage,
-    type: "text",
-    onChange: changeMessage
-  })), props.attributes.sponsorImage ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-    src: props.attributes.sponsorImage,
-    height: "100px",
-    width: "100%"
-  })) : " ", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.MediaPlaceholder, {
-    labels: {
-      title: "Sponsor Image"
-    },
-    value: props.attributes.sponsorImage,
-    onSelect: setSponsorImage
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
-    isPrimary: true,
-    onClick: () => {
-      props.setAttributes({
-        sponsorImage: undefined
-      });
-    }
-  }, "Remove Sponsor Image")))), props.attributes.phrase.map(function (word, index) {
-    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Flex, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.FlexBlock, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
-      autoFocus: word == undefined,
-      value: word,
-      onChange: newValue => {
-        const newphrase = props.attributes.phrase.concat([]);
-        newphrase[index] = newValue;
-        props.setAttributes({
-          phrase: newphrase
-        });
+  const [heroes, setHeroes] = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)([]);
+  const [heroOftheDay, setHeroOftheDay] = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)(null);
+  (0,react__WEBPACK_IMPORTED_MODULE_3__.useEffect)(() => {
+    const getHero = async () => {
+      try {
+        const response = await fetch("https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/all.json");
+        if (!response.ok) {
+          throw new Error("Failed to fetch heroes");
+        }
+        const data = await response.json();
+        setHeroes(data);
+      } catch (error) {
+        console.error("Error fetching heroes:", error);
       }
-    })));
-  }));
+    };
+    getHero();
+  }, []);
+  function changeHero(hero) {
+    props.setAttributes({
+      heroName: hero.name
+    });
+    props.setAttributes({
+      intelligence: hero.powerstats.intelligence
+    });
+    props.setAttributes({
+      strength: hero.powerstats.strength
+    });
+    props.setAttributes({
+      speed: hero.powerstats.speed
+    });
+    props.setAttributes({
+      fullName: hero.biography.fullName
+    });
+    props.setAttributes({
+      heroImage: hero.images.lg
+    });
+  }
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Flex, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.FlexBlock, null, heroes.map(hero => {
+    if (hero.biography.publisher === "Marvel Comics") {
+      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+        key: hero.id,
+        className: `hero-button ${props.attributes.heroName === hero.name ? "selected" : ""}`,
+        onClick: () => changeHero(hero)
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+        value: hero.name,
+        readOnly: true
+      }));
+    }
+  }), heroOftheDay && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, props.attributes.heroName))));
 }
 })();
 
