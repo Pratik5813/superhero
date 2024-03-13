@@ -177,6 +177,7 @@ wp.blocks.registerBlockType("theplugin/superhero", {
 function EditComponent(props) {
   const [heroes, setHeroes] = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)([]);
   const [heroOftheDay, setHeroOftheDay] = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)(null);
+  const [selectedPublisher, setSelectedPublisher] = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)("Marvel Comics");
   (0,react__WEBPACK_IMPORTED_MODULE_3__.useEffect)(() => {
     const getHero = async () => {
       try {
@@ -212,18 +213,32 @@ function EditComponent(props) {
       heroImage: hero.images.lg
     });
   }
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Flex, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.FlexBlock, null, heroes.map(hero => {
-    if (hero.biography.publisher === "Marvel Comics") {
-      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-        key: hero.id,
-        className: `hero-button ${props.attributes.heroName === hero.name ? "selected" : ""}`,
-        onClick: () => changeHero(hero)
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
-        value: hero.name,
-        readOnly: true
-      }));
-    }
-  }), heroOftheDay && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, props.attributes.heroName))));
+  function handlePublisherSelection(publisher) {
+    setSelectedPublisher(publisher);
+  }
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", {
+    className: "pp_text_center"
+  }, "Choose between Marvel, DC, or Dark Horse Comics"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "current_hero"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("small", null, props.attributes.heroName !== "" ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, "Currently Selected hero is ", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("strong", null, props.attributes.heroName)) : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "No hero is selected.")), " ")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Flex, {
+    className: "pp_publisher_flex"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.FlexBlock, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+    className: `pp_publisher ${selectedPublisher === "Marvel Comics" ? "selected" : ""}`,
+    onClick: () => handlePublisherSelection("Marvel Comics")
+  }, "MARVEL")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.FlexBlock, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+    className: `pp_publisher ${selectedPublisher === "DC Comics" ? "selected" : ""}`,
+    onClick: () => handlePublisherSelection("DC Comics")
+  }, "DC")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.FlexBlock, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+    className: `pp_publisher ${selectedPublisher === "Dark Horse Comics" ? "selected" : ""}`,
+    onClick: () => handlePublisherSelection("Dark Horse Comics")
+  }, "DARK HORSE"))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Flex, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.FlexBlock, null, heroes.filter(hero => hero.biography.publisher == selectedPublisher).map(hero => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    key: hero.id,
+    className: `hero-button ${props.attributes.heroName === hero.name ? "selected" : ""}`,
+    onClick: () => changeHero(hero)
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    value: hero.name,
+    readOnly: true
+  }))))));
 }
 })();
 

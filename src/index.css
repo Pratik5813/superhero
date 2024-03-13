@@ -6,3 +6,34 @@
   background-color: #000;
   color: #fff;
 }
+.pp_publisher_flex {
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 50px;
+}
+.pp_publisher {
+  cursor: pointer;
+  background-color: #fff; /* Default background color */
+  color: #000; /* Default text color */
+  border: 1px solid #ccc; /* Border color */
+  border-radius: 4px; /* Rounded corners */
+  padding: 10px 20px; /* Padding */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Box shadow */
+  transition: box-shadow 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.pp_publisher.selected {
+  background-color: #000; /* Background color when selected */
+  color: #fff; /* Text color when selected */
+}
+
+.pp_publisher:hover {
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Box shadow on hover */
+}
+.pp_text_center {
+  text-align: center;
+}
+.current_hero {
+  text-align: center;
+  margin-bottom: 20px;
+}
